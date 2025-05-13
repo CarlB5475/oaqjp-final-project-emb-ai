@@ -20,6 +20,11 @@ def sent_emotion_detector():
     sadness_score = res['sadness']
     dominant_emotion = res['dominant_emotion']
 
+    # If the dominant emotion is None, then return an invalid response message.
+    if dominant_emotion is None:
+        return "Invalid text! Please try again!"
+    
+        
     # Format the string response to return.
     formatted_res = f"""
             For the given statement, 
