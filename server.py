@@ -1,3 +1,6 @@
+'''
+The main server application for the Emotion Detector app.
+'''
 from flask import Flask, request, render_template
 
 from EmotionDetection.emotion_detection import emotion_detector
@@ -6,6 +9,11 @@ app = Flask("Emotion Detector")
 
 @app.route("/emotionDetector")
 def sent_emotion_detector():
+    '''
+    An API route that retrieves the text input to analyze the
+    emotions in it. Returns a response to each of the scores for
+    each emotion as well as the dominant emotion from that text input.
+    '''
     # Retrieve the text to analyze from the request arguments
     text_to_analyze = request.args.get("textToAnalyze")
 
@@ -23,8 +31,7 @@ def sent_emotion_detector():
     # If the dominant emotion is None, then return an invalid response message.
     if dominant_emotion is None:
         return "Invalid text! Please try again!"
-    
-        
+
     # Format the string response to return.
     formatted_res = f"""
             For the given statement, 
@@ -39,6 +46,7 @@ def sent_emotion_detector():
 
 @app.route("/")
 def render_index_page():
+    '''Returns the main html page for the emotion detection application.'''
     return render_template('index.html')
 
 
